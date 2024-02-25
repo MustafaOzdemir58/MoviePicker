@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoviePicker.Domain
+namespace MoviePicker.Application.Dtos
 {
-    public class Movie
+    public class MovieDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
