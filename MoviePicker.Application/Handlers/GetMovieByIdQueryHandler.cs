@@ -23,8 +23,17 @@ namespace MoviePicker.Application.Handlers
         }
         public async Task<MovieDto> Handle(GetMovieByIdQuery request, CancellationToken cancellationToken)
         {
-            var response = _connection.GetById("Select * from Movies where Id=@Id", request.Id);
-            return _mapper.Map<MovieDto>(response);
+            try
+            {
+                var response = await _connection.GetById("Select * from Movies where Id=" + request.Id);
+                return _mapper.Map<MovieDto>(response);
+            }
+            catch (Exception)
+            {
+
+              return default(MovieDto); 
+            }
+           
         }
     }
 }

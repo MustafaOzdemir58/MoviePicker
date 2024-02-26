@@ -22,7 +22,7 @@ namespace MoviePicker.Application.Handlers
 
         public async Task<bool> Handle(DeleteMovieCommand request, CancellationToken cancellationToken)
         {
-            var result = await _connection.Delete("Delete from Movies where Id=@id", request.Id);
+            var result = await _connection.Delete("Update Movies set IsDeleted=true where Id="+request.Id);
             return result > 0;
         }
     }

@@ -22,7 +22,7 @@ namespace MoviePicker.Application.Handlers
 
         public async Task<CreateMovieDto> Handle(CreateMovieCommand request, CancellationToken cancellationToken)
         {
-            var id = await _connection.Add("Insert into Movies (Name,Point,Image,Description) values(@Name,@Point,@Image,@Description)", request);
+            var id = await _connection.Add("Insert into Movies (Name,Point,Image,Description,IsDeleted,CreatedDate) values(@Name,@Point,@Image,@Description,false,@CreatedDate)", new object[] { request, DateTime.Now });
             return new CreateMovieDto { Id = id };
 
         }

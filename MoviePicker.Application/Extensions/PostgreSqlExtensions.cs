@@ -31,18 +31,10 @@ namespace MoviePicker.Application.Extensions
                     {
                         dbExists = cmd.ExecuteScalar() != null;
                     }
-                    if (!dbExists)
-                    {
-                        string createDbTxt = $"Create DATABASE {dbName}";
-                        using (NpgsqlCommand cmd = new NpgsqlCommand(createDbTxt, connection))
-                        {
-                            dbExists = cmd.ExecuteScalar() != null;
-                        }
-                    }
                     if (dbExists && !tablesExists)
                     {
-                        string createMovieTableTxt = "CREATE TABLE [IF NOT EXISTS] Movies (" +
-                            "Id INTEGER PRIMARY KEY, Name VARCHAR (50) NOT NULL,Image VARCHAR (50),Description VARCHAR (500), IsDeleted bit NOT NULL,CreatedDate datetime NOT NULL, UpdateDate datetime,DeletedDate,Point DOUBLE PRECISION" +
+                        string createMovieTableTxt = "CREATE TABLE IF NOT EXISTS Movies (" +
+                            "Id SERIAL PRIMARY KEY, Name VARCHAR (500) NOT NULL,Image VARCHAR (500),Description VARCHAR (500), IsDeleted bool NOT NULL,CreatedDate timestamp NOT NULL, UpdateDate timestamp,DeletedDate timestamp,Point double precision" +
                             ")";
                         using (NpgsqlCommand cmd = new NpgsqlCommand(createMovieTableTxt, connection))
                         {

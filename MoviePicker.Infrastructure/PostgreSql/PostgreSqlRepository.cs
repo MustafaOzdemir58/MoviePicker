@@ -40,8 +40,17 @@ namespace MoviePicker.Infrastructure.PostgreSql
 
         public async Task<T> GetById(string query, object param = null)
         {
-            var data = await _connection.QuerySingleAsync<T>(query, param);
-            return data;
+            try
+            {
+                var data = await _connection.QuerySingleAsync<T>(query, param);
+                return data;
+            }
+            catch (Exception ex)
+            {
+
+                return default(T);
+            }
+
         }
 
         public async Task<int> Update(string query, object param = null)
