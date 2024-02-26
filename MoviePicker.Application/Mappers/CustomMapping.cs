@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MoviePicker.Application.Commands;
 using MoviePicker.Application.Dtos;
 using MoviePicker.Domain;
 using System;
@@ -14,6 +15,8 @@ namespace MoviePicker.Application.Mappers
         public CustomMapping()
         {
             CreateMap<MovieDto, Movie>().ReverseMap();
+            CreateMap<MovieListDto, Movie>().ReverseMap();
+            CreateMap<UpdateMovieCommand, Movie>().ReverseMap();
         }
     }
 }
