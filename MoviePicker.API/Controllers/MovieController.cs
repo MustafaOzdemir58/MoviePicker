@@ -21,9 +21,9 @@ namespace MoviePicker.API.Controllers
         public async Task<IActionResult> Create([FromBody] CreateMovieCommand model)
         {
             var response = await _mediator.Send(model);
-            if (response.Id is 0) return BadRequest("Movie creating failed");
+            if (!response) return BadRequest("Movie creating failed");
 
-            return Ok(response);
+            return Created();
         }
         [HttpPut("update")]
         public async Task<IActionResult> Update(UpdateMovieCommand model)

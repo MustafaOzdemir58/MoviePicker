@@ -1,4 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
+using MoviePicker.Application.Commands;
+using MoviePicker.Application.Middlewares;
+using MoviePicker.Application.Pipelines;
+using MoviePicker.Application.Validators;
 using MoviePicker.Domain;
 using MoviePicker.Infrastructure.PostgreSql;
 using System;
@@ -18,8 +23,16 @@ namespace MoviePicker.Application.Extensions
             services.AddMediatR(x =>
              {
                  x.RegisterServicesFromAssemblies(assmbly);
+                 x.AddOpenBehavior(typeof(ValidationBehavior<,>));
+
              });
             services.AddAutoMapper(assmbly);
+            #region Validators
+            services.AddScoped<IValidator<CreateMovieCommand>, CreateMovieCommandValidator>();
+            services.AddScoped<IValidator<DeleteMovieCommand>, DeleteMovieCommandValidator>();
+            services.AddScoped<IValidator<UpdateMovieCommand>, UpdateMovieCommandValidator>();
+            #endregion
+
             services.AddScoped<IPostgreSqlRepository<Movie>, PostgreSqlRepository<Movie>>();
         }
     }

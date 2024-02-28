@@ -1,4 +1,5 @@
 using MoviePicker.Application.Extensions;
+using MoviePicker.Application.Middlewares;
 using MoviePicker.Infrastructure.PostgreSql;
 using System.Reflection;
 using static System.Net.Mime.MediaTypeNames;
@@ -20,7 +21,9 @@ IServiceCollectionExtensions.AddRepositories(builder.Services);
 PostgreSqlExtensions.CreateDbIfNotExist(builder.Configuration);
 
 
+
 var app = builder.Build();
+app.UseMiddleware<ValidationExceptionHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

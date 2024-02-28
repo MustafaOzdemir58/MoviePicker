@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MoviePicker.Application.Commands
 {
-    public class DeleteMovieCommand : IRequest<bool>
+    public sealed class DeleteMovieCommand : IRequest<bool>
     {
         public int Id { get; set; }
     }

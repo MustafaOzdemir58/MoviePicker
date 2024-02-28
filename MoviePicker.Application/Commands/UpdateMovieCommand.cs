@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace MoviePicker.Application.Commands
 {
-    public class UpdateMovieCommand : IRequest<bool>
+    public sealed class UpdateMovieCommand : IRequest<bool>
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public double Point { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }
+        public DateTime UpdateDate { get; private set; } = DateTime.Now;
     }
 }

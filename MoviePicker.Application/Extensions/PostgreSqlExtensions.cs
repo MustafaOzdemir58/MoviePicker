@@ -19,7 +19,7 @@ namespace MoviePicker.Application.Extensions
         {
             try
             {
-                string dbName = configuration.GetSection("PostgreSql:DatabaseName").Value ??"MoviePicker";
+                string dbName = configuration.GetSection("PostgreSql:DatabaseName").Value ?? "MoviePicker";
                 string connectionString = configuration.GetConnectionString("PostgreSql");
                 bool dbExists = false;
                 bool tablesExists = false;
@@ -34,7 +34,7 @@ namespace MoviePicker.Application.Extensions
                     if (dbExists && !tablesExists)
                     {
                         string createMovieTableTxt = "CREATE TABLE IF NOT EXISTS Movies (" +
-                            "Id SERIAL PRIMARY KEY, Name VARCHAR (500) NOT NULL,Image VARCHAR (500),Description VARCHAR (500), IsDeleted bool NOT NULL,CreatedDate timestamp NOT NULL, UpdateDate timestamp,DeletedDate timestamp,Point double precision" +
+                            "Id SERIAL PRIMARY KEY, Name VARCHAR (500) NOT NULL,Image VARCHAR (500),Description VARCHAR (500), IsDeleted bool NOT NULL,CreatedDate date NOT NULL, UpdateDate date,DeletedDate date,Point double precision" +
                             ")";
                         using (NpgsqlCommand cmd = new NpgsqlCommand(createMovieTableTxt, connection))
                         {

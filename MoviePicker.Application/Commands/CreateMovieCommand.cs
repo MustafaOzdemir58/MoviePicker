@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace MoviePicker.Application.Commands
 {
-    public class CreateMovieCommand : IRequest<CreateMovieDto>
+    public sealed class CreateMovieCommand : IRequest<bool>
     {
         public string Name { get; set; }
         public double Point { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }
+        public DateTime CreatedDate { get; private set; } = DateTime.Now;
     }
 }
