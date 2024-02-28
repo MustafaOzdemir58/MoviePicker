@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MoviePicker.Domain;
-using MoviePicker.Domain.Settings;
 using MoviePicker.Infrastructure.PostgreSql;
 using Npgsql;
 using System;
